@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGNITE GARAGE — เครื่องมือกรองสินค้าด้วยตรรกะเซต</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <div class="logo">
+      <span class="logo-mark"></span>
+      <span class="logo-text display">IGNITE<span>GARAGE</span></span>
+    </div>
+    <nav class="cats" id="categoryNav">
+      <button data-cat="all" class="active">ทั้งหมด</button>
+      <button data-cat="light">ไฟ</button>
+      <button data-cat="engine">เครื่องยนต์</button>
+      <button data-cat="exhaust">ท่อไอเสีย</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Set Logic Engine — คณิตศาสตร์ดิสครีต</div>
+    <h1>กรองสินค้าแต่งรถด้วย<br><em>ตรรกะเซต</em> จริง ๆ</h1>
+    <p>ระบบร้าน IGNITE GARAGE ใช้ทฤษฎีเซตในการแนะนำสินค้า: กำหนดให้ <b>A</b> คือเซตสินค้าลดราคา และ <b>B</b> คือเซตสินค้าแนะนำ แล้วลองกดปุ่มด้านล่างเพื่อดูผลลัพธ์ของ A∪B, A∩B, A−B และอื่น ๆ บนสินค้าไฟ เครื่องยนต์ และท่อไอเสียจริงในร้าน</p>
+  </div>
+</section>
+
+<section class="console">
+  <div class="wrap">
+    <div class="console-head">
+      <h2>Set Console</h2>
+      <span class="sub">U = {สินค้าทั้งหมดในร้าน}</span>
+    </div>
+
+    <div class="console-grid">
+
+      <div class="venn-card">
+        <div class="venn-svg-holder">
+          <svg width="260" height="180" viewBox="0 0 260 180">
+            <circle id="circleA" cx="105" cy="90" r="70" fill="rgba(255,90,31,0.28)" stroke="#ff5a1f" stroke-width="2"/>
+            <circle id="circleB" cx="165" cy="90" r="70" fill="rgba(47,212,255,0.22)" stroke="#2fd4ff" stroke-width="2"/>
+            <text x="55" y="45" fill="#ff5a1f" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">A</text>
+            <text x="200" y="45" fill="#2fd4ff" font-family="JetBrains Mono, monospace" font-size="15" font-weight="600">B</text>
+            <text x="128" y="93" fill="#f1f1ef" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle" id="vennCount">|A∩B|</text>
+          </svg>
+        </div>
+        <div class="legend">
+          <div class="legend-row"><span class="swatch a"></span> A = สินค้าลดราคา</div>
+          <div class="legend-row"><span class="swatch b"></span> B = สินค้าแนะนำ</div>
+        </div>
+        <div class="readout mono" id="setReadout">
+          <div class="row"><span>|U|</span><b id="cardU">0</b></div>
+          <div class="row"><span>|A|</span><b id="cardA">0</b></div>
+          <div class="row"><span>|B|</span><b id="cardB">0</b></div>
+          <div class="row"><span>|A ∩ B|</span><b id="cardAB">0</b></div>
+        </div>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-grid" id="opButtons">
+          <button class="op-btn" data-op="A"><span class="sym">A</span><span class="lbl">ลดราคา</span></button>
+          <button class="op-btn" data-op="B"><span class="sym">B</span><span class="lbl">แนะนำ</span></button>
+          <button class="op-btn active" data-op="U"><span class="sym">U</span><span class="lbl">ทั้งหมด</span></button>
+          <button class="op-btn" data-op="AuB"><span class="sym">A∪B</span><span class="lbl">ยูเนียน</span></button>
+          <button class="op-btn" data-op="AnB"><span class="sym">A∩B</span><span class="lbl">อินเตอร์เซกชัน</span></button>
+          <button class="op-btn" data-op="A-B"><span class="sym">A−B</span><span class="lbl">ลดราคาเท่านั้น</span></button>
+          <button class="op-btn" data-op="B-A"><span class="sym">B−A</span><span class="lbl">แนะนำเท่านั้น</span></button>
+          <button class="op-btn" data-op="A'"><span class="sym">A′</span><span class="lbl">ไม่ลดราคา</span></button>
+          <button class="op-btn" data-op="B'"><span class="sym">B′</span><span class="lbl">ไม่แนะนำ</span></button>
+        </div>
+        <div class="result-line" id="resultLine">
+          U = {สินค้าทั้งหมด} &nbsp; → &nbsp; <span class="count">0</span> รายการ
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="catalog">
+  <div class="wrap">
+    <div class="catalog-head">
+      <h2>ผลลัพธ์การกรอง</h2>
+      <span class="count-pill" id="resultCountPill">0 รายการ</span>
+    </div>
+    <p class="hint">👆 คลิกที่การ์ดสินค้าเพื่อเลือก/ยกเลิกเลือก (เก็บไว้ใน JavaScript <code>Set</code> จริง ๆ)</p>
+    <div class="grid" id="productGrid"></div>
+
+    <div class="selection-bar" id="selectionBar">
+      <div class="selection-info">
+        <span class="mono">เซตที่เลือก C = { <b id="selCount">0</b> ชิ้น }</span>
+        <span class="mono muted-inline" id="selTotal">รวม ฿0</span>
+      </div>
+      <div class="selection-actions">
+        <button id="clearSelection" class="ghost-btn">ล้างการเลือก</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 IGNITE GARAGE — อุปกรณ์แต่งรถ ไฟ เครื่องยนต์ ท่อไอเสีย</span>
+  <span>Set Logic Engine v1.0</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
